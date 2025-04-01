@@ -8,7 +8,7 @@ export function MessageList() {
 	const [messages, setMessages] = useState<TMessage[]>([])
 
 	const loadMessages = async () => {
-		const messages = await fetchData<TMessage[]>(`${BASE_URL}/posts?limit=20`)
+		const messages = await fetchData<TMessage[]>(`${BASE_URL}/posts`)
 		if (messages) setMessages(messages)
 	}
 
