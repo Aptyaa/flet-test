@@ -1,0 +1,15 @@
+#root {
+  /* display: flex; */
+  /* max-width: 758px; */
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+

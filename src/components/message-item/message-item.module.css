@@ -1,0 +1,81 @@
+.container {
+  text-align: left;
+  border: 0.0625rem solid #e0e0e0;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.container:hover {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.12);
+}
+
+.messageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.author {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.email {
+  font-size: 0.8125rem;
+  color: #7f8c8d;
+  margin: 0;
+  font-style: italic;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 0.75rem;
+}
+
+.body {
+  font-size: 0.9375rem;
+  color: #34495e;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.btn {
+  display: block;
+  margin-left: auto;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+}
+
+
+.commentsContainer {
+  margin-top: 0.75rem;
+  padding-left: 1.5rem;
+  animation: slideComment 1s ease-out forwards;
+  overflow: hidden;
+}
+
+.commentsContainerHidden {
+  max-height: 0;
+  overflow: hidden;
+}
+
+@keyframes slideComment {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 1000px;
+    opacity: 1;
+  }
+}
