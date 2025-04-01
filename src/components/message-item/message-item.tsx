@@ -1,23 +1,24 @@
-import { useEffect, useState } from 'react'
+import { memo, useContext, useState } from 'react'
 import { fetchData } from '../../utils/fetchData'
-import { TComment, TMessage, TUser } from '../../const'
+import { TComment, TMessage } from '../../const'
 import { CommentItem } from '../comment-item/comment-item'
 import { Button } from '../button/button'
 import loader from '../../assets/loader.svg'
 import style from './message-item.module.css'
 import { Devider } from '../devider/devider'
 import { BASE_URL } from '../../const'
+import { UserContext } from '../message-list/message-list'
 
 type TMessageItemProp = {
 	message: TMessage
 }
 
-export function MessageItem({ message }: TMessageItemProp) {
+export default memo(function MessageItem({ message }: TMessageItemProp) {
 	const [comments, setComments] = useState<TComment[]>([])
 	const [isLoaded, setIsLoaded] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 	const [isVisible, setIsVisible] = useState(false)
-	const [user, setUser] = useState<TUser | null>(null)
+	const users = useContext(UserContext)
 
 	const loadComments = async () => {
 		if (isLoaded) return
@@ -29,18 +30,6 @@ export function MessageItem({ message }: TMessageItemProp) {
 		setIsLoading(false)
 		if (comments) setComments(comments)
 	}
-
-	const loadUser = async () => {
-		const userData = await fetchData<TUser>(
-			`${BASE_URL}/users/${message.userId}`
-		)
-		if (userData) setUser(userData)
-	}
-
-	useEffect(() => {
-		loadUser()
-	}, [])
-
 	const handleClick = () => {
 		loadComments()
 		setIsVisible(!isVisible)
@@ -49,8 +38,8 @@ export function MessageItem({ message }: TMessageItemProp) {
 	return (
 		<div className={style.container}>
 			<div className={style.messageHeader}>
-				<p className={style.author}>{user?.username}</p>
-				<p className={style.email}>✉ {user?.email}</p>
+				<p className={style.author}>{users[message.userId]?.username}</p>
+				<p className={style.email}>✉ {users[message.userId]?.email}</p>
 			</div>
 
 			<p className={style.title}>{message.title}</p>
@@ -80,4 +69,4 @@ export function MessageItem({ message }: TMessageItemProp) {
 			</div>
 		</div>
 	)
-}
+})
